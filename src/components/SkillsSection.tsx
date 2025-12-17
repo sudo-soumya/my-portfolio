@@ -1,28 +1,82 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { 
+  Terminal, 
+  Container, 
+  GitBranch, 
+  Cloud, 
+  Workflow, 
+  Code2,
+  Server,
+  Boxes
+} from "lucide-react";
 
-const skills = [
-  { name: "React / Next.js", level: 95, color: "from-primary to-neon-blue" },
-  { name: "TypeScript", level: 90, color: "from-neon-blue to-primary" },
-  { name: "Node.js / Express", level: 85, color: "from-primary to-accent" },
-  { name: "Python / Django", level: 80, color: "from-accent to-neon-purple" },
-  { name: "PostgreSQL / MongoDB", level: 85, color: "from-neon-purple to-primary" },
-  { name: "AWS / Docker", level: 75, color: "from-primary to-neon-blue" },
-  { name: "Tailwind CSS", level: 95, color: "from-neon-blue to-accent" },
-  { name: "Git / CI/CD", level: 90, color: "from-accent to-primary" },
+type Proficiency = "Beginner" | "Intermediate" | "Advanced";
+
+interface Skill {
+  name: string;
+  icon: React.ElementType;
+  proficiency: Proficiency;
+}
+
+const skills: Skill[] = [
+  { name: "Linux", icon: Terminal, proficiency: "Advanced" },
+  { name: "Docker", icon: Container, proficiency: "Advanced" },
+  { name: "Kubernetes", icon: Boxes, proficiency: "Intermediate" },
+  { name: "Git", icon: GitBranch, proficiency: "Advanced" },
+  { name: "CI/CD", icon: Workflow, proficiency: "Advanced" },
+  { name: "AWS", icon: Cloud, proficiency: "Intermediate" },
+  { name: "Terraform", icon: Server, proficiency: "Intermediate" },
+  { name: "Bash", icon: Terminal, proficiency: "Advanced" },
+  { name: "Python", icon: Code2, proficiency: "Intermediate" },
 ];
 
-const techIcons = [
-  { name: "React", icon: "⚛️" },
-  { name: "TypeScript", icon: "📘" },
-  { name: "Node.js", icon: "🟢" },
-  { name: "Python", icon: "🐍" },
-  { name: "PostgreSQL", icon: "🐘" },
-  { name: "Docker", icon: "🐳" },
-  { name: "AWS", icon: "☁️" },
-  { name: "Git", icon: "📦" },
-];
+const proficiencyColors: Record<Proficiency, string> = {
+  Beginner: "text-yellow-400",
+  Intermediate: "text-neon-blue",
+  Advanced: "text-primary",
+};
+
+const SkillCard = ({ skill, index, isInView }: { skill: Skill; index: number; isInView: boolean }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const Icon = skill.icon;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.4, delay: 0.1 + index * 0.05 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative group"
+    >
+      <motion.div
+        whileHover={{ scale: 1.05, y: -5 }}
+        className="glass rounded-xl p-6 flex flex-col items-center gap-4 cursor-default transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-[0_0_30px_rgba(0,255,255,0.2)] min-h-[140px]"
+      >
+        <div className="relative">
+          <Icon className="w-10 h-10 text-primary transition-all duration-300 group-hover:text-primary group-hover:drop-shadow-[0_0_10px_rgba(0,255,255,0.8)]" />
+        </div>
+        
+        <span className="font-medium text-foreground text-center">{skill.name}</span>
+        
+        {/* Proficiency label on hover */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ 
+            opacity: isHovered ? 1 : 0, 
+            y: isHovered ? 0 : 10 
+          }}
+          transition={{ duration: 0.2 }}
+          className={`absolute bottom-4 ${proficiencyColors[skill.proficiency]} font-display text-sm font-semibold`}
+        >
+          {skill.proficiency}
+        </motion.div>
+      </motion.div>
+    </motion.div>
+  );
+};
 
 export const SkillsSection = () => {
   const ref = useRef(null);
@@ -52,50 +106,15 @@ export const SkillsSection = () => {
           </p>
         </motion.div>
 
-        {/* Tech Icons */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4 mb-16"
-        >
-          {techIcons.map((tech, index) => (
-            <motion.div
-              key={tech.name}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
-              whileHover={{ scale: 1.1, y: -5 }}
-              className="glass rounded-xl px-6 py-4 flex items-center gap-3 cursor-default"
-            >
-              <span className="text-2xl">{tech.icon}</span>
-              <span className="text-sm font-medium text-foreground">{tech.name}</span>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Progress Bars */}
-        <div className="max-w-3xl mx-auto space-y-6">
+        {/* Skills Grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6 max-w-5xl mx-auto">
           {skills.map((skill, index) => (
-            <motion.div
-              key={skill.name}
-              initial={{ opacity: 0, x: -30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-            >
-              <div className="flex justify-between items-center mb-2">
-                <span className="font-medium text-foreground">{skill.name}</span>
-                <span className="text-primary font-display">{skill.level}%</span>
-              </div>
-              <div className="h-3 bg-muted rounded-full overflow-hidden">
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={isInView ? { width: `${skill.level}%` } : {}}
-                  transition={{ duration: 1, delay: 0.6 + index * 0.1, ease: "easeOut" }}
-                  className={`h-full rounded-full bg-gradient-to-r ${skill.color} skill-bar`}
-                />
-              </div>
-            </motion.div>
+            <SkillCard 
+              key={skill.name} 
+              skill={skill} 
+              index={index} 
+              isInView={isInView} 
+            />
           ))}
         </div>
       </div>
