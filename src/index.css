@@ -4,6 +4,65 @@
 
 @layer base {
   :root {
+    /* Light mode - Clean professional theme */
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Cyan primary - slightly darker for light mode */
+    --primary: 180 100% 35%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Light blue secondary */
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 94%;
+    --muted-foreground: 215 20% 45%;
+
+    /* Purple accent */
+    --accent: 270 91% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 32% 85%;
+    --input: 214 32% 91%;
+    --ring: 180 100% 35%;
+
+    --radius: 0.75rem;
+
+    /* Custom neon colors - adjusted for light mode */
+    --neon-cyan: 180 100% 35%;
+    --neon-blue: 210 100% 50%;
+    --neon-purple: 270 91% 55%;
+    --neon-glow: 0 0 15px hsl(180 100% 35% / 0.3), 0 0 30px hsl(180 100% 35% / 0.15);
+    --neon-glow-purple: 0 0 15px hsl(270 91% 55% / 0.3), 0 0 30px hsl(270 91% 55% / 0.15);
+    
+    /* Gradients for light mode */
+    --gradient-dark: linear-gradient(180deg, hsl(210 40% 98%) 0%, hsl(210 40% 96%) 50%, hsl(210 40% 94%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(210 40% 98%) 100%);
+    --gradient-neon: linear-gradient(135deg, hsl(180 100% 35%) 0%, hsl(210 100% 50%) 50%, hsl(270 91% 55%) 100%);
+    --gradient-text: linear-gradient(90deg, hsl(180 100% 35%) 0%, hsl(270 91% 55%) 100%);
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 180 100% 35%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 40% 94%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 214 32% 85%;
+    --sidebar-ring: 180 100% 35%;
+  }
+
+  .dark {
     /* Dark blue theme */
     --background: 222 47% 6%;
     --foreground: 210 40% 98%;
@@ -36,8 +95,6 @@
     --input: 217 33% 17%;
     --ring: 180 100% 50%;
 
-    --radius: 0.75rem;
-
     /* Custom neon colors */
     --neon-cyan: 180 100% 50%;
     --neon-blue: 210 100% 60%;
@@ -51,7 +108,7 @@
     --gradient-neon: linear-gradient(135deg, hsl(180 100% 50%) 0%, hsl(210 100% 60%) 50%, hsl(270 91% 65%) 100%);
     --gradient-text: linear-gradient(90deg, hsl(180 100% 50%) 0%, hsl(270 91% 65%) 100%);
 
-    /* Sidebar (keeping defaults) */
+    /* Sidebar */
     --sidebar-background: 220 43% 8%;
     --sidebar-foreground: 210 40% 98%;
     --sidebar-primary: 180 100% 50%;
@@ -60,28 +117,6 @@
     --sidebar-accent-foreground: 210 40% 98%;
     --sidebar-border: 217 33% 20%;
     --sidebar-ring: 180 100% 50%;
-  }
-
-  .dark {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
-    --card: 220 43% 8%;
-    --card-foreground: 210 40% 98%;
-    --popover: 220 43% 8%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 180 100% 50%;
-    --primary-foreground: 222 47% 6%;
-    --secondary: 215 50% 15%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 270 91% 65%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62% 30%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217 33% 20%;
-    --input: 217 33% 17%;
-    --ring: 180 100% 50%;
   }
 }
 
