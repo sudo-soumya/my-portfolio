@@ -88,7 +88,7 @@ export const Navbar = () => {
             className="gap-2"
           >
             <Download className="w-4 h-4" />
-            Download CV
+            Download Resume
           </Button>
         </div>
 
@@ -133,7 +133,7 @@ export const Navbar = () => {
                 className="gap-2 w-full"
               >
                 <Download className="w-4 h-4" />
-                Download CV
+                Download Resume
               </Button>
             </div>
           </motion.div>

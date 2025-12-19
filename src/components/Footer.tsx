@@ -43,9 +43,14 @@ export const Footer = () => {
             ))}
           </div>
 
-          {/* Copyright */}
+          {/* Made with */}
           <p className="text-muted-foreground text-sm flex items-center gap-1">
-            Made with <Heart className="w-4 h-4 text-destructive" /> © {new Date().getFullYear()}
+            Made with <Heart className="w-4 h-4 text-destructive" /> by Soumya Mishra
+          </p>
+
+          {/* Copyright */}
+          <p className="text-muted-foreground text-sm">
+            © 2025 All rights reserved
           </p>
         </div>
       </div>
