@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Send, Mail, MapPin, Phone, CheckCircle } from "lucide-react";
+import { Send, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,19 +11,13 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "hello@johndeveloper.com",
-    href: "mailto:hello@johndeveloper.com",
-  },
-  {
-    icon: Phone,
-    label: "Phone",
-    value: "+1 (555) 123-4567",
-    href: "tel:+15551234567",
+    value: "soumyamishra.tech@gmail.com",
+    href: "mailto:soumyamishra.tech@gmail.com",
   },
   {
     icon: MapPin,
     label: "Location",
-    value: "San Francisco, CA",
+    value: "India",
     href: "#",
   },
 ];
