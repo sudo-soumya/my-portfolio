@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "./ThemeToggle";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -90,6 +91,7 @@ export const Navbar = () => {
             <Download className="w-4 h-4" />
             Download Resume
           </Button>
+          <ThemeToggle />
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -135,6 +137,9 @@ export const Navbar = () => {
                 <Download className="w-4 h-4" />
                 Download Resume
               </Button>
+              <div className="flex justify-center pt-2">
+                <ThemeToggle />
+              </div>
             </div>
           </motion.div>
         )}
