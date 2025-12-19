@@ -1,28 +1,28 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Code2, Palette, Rocket, Users } from "lucide-react";
+import { Cloud, Server, Shield, Activity } from "lucide-react";
 
 const highlights = [
   {
-    icon: Code2,
-    title: "Clean Code",
-    description: "Writing maintainable, scalable solutions",
+    icon: Cloud,
+    title: "Cloud Infrastructure",
+    description: "Designing scalable AWS & Oracle Cloud solutions",
   },
   {
-    icon: Palette,
-    title: "UI/UX Design",
-    description: "Creating intuitive user experiences",
+    icon: Server,
+    title: "Automation",
+    description: "CI/CD pipelines and Infrastructure as Code",
   },
   {
-    icon: Rocket,
-    title: "Performance",
-    description: "Optimizing for speed and efficiency",
+    icon: Activity,
+    title: "Observability",
+    description: "Monitoring, logging, and alerting systems",
   },
   {
-    icon: Users,
-    title: "Collaboration",
-    description: "Working effectively with teams",
+    icon: Shield,
+    title: "Security",
+    description: "Service mesh, networking, and security tools",
   },
 ];
 
@@ -53,42 +53,20 @@ export const AboutSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <h3 className="font-display text-2xl font-semibold mb-6 text-foreground">
-              Passionate Developer with 5+ Years of Experience
+              DevOps Engineer with 2+ Years of Experience
             </h3>
             <p className="text-muted-foreground mb-6 leading-relaxed">
-              I'm a full-stack developer based in San Francisco, specializing in 
-              building exceptional digital experiences. With a strong foundation 
-              in both front-end and back-end technologies, I bring ideas to life 
-              through clean, efficient code.
+              I'm a DevOps Engineer passionate about building and maintaining robust 
+              cloud infrastructure. My expertise lies in automating deployments, 
+              implementing monitoring solutions, and ensuring system reliability 
+              across multi-cloud environments.
             </p>
             <p className="text-muted-foreground mb-8 leading-relaxed">
-              When I'm not coding, you'll find me exploring new technologies, 
-              contributing to open-source projects, or sharing knowledge through 
-              technical writing and mentorship. I believe in continuous learning 
-              and staying at the forefront of web development trends.
+              From setting up Kubernetes clusters to designing CI/CD pipelines, I 
+              focus on creating efficient, secure, and scalable infrastructure. I 
+              believe in taking ownership beyond role expectations and continuously 
+              improving system performance and reliability.
             </p>
-
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-6">
-              {[
-                { value: "5+", label: "Years Experience" },
-                { value: "50+", label: "Projects Completed" },
-                { value: "30+", label: "Happy Clients" },
-              ].map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                  className="text-center"
-                >
-                  <div className="font-display text-3xl font-bold text-primary neon-text mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
           </motion.div>
 
           {/* Highlights Grid */}
