@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter, Instagram, Heart } from "lucide-react";
+import { Github, Linkedin, Instagram, Heart } from "lucide-react";
 
 const socialLinks = [
-  { icon: Github, href: "#", label: "GitHub" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Instagram, href: "#", label: "Instagram" },
+  { icon: Github, href: "https://github.com/soumyaxm", label: "GitHub" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/soumya-mishra-73870a24a/", label: "LinkedIn" },
+  { icon: Instagram, href: "https://www.instagram.com/soumya.mishra._/", label: "Instagram" },
 ];
 
 export const Footer = () => {
@@ -23,7 +22,7 @@ export const Footer = () => {
             className="font-display text-xl font-bold text-primary neon-text"
             whileHover={{ scale: 1.05 }}
           >
-            {"<Dev />"}
+            {"<SM />"}
           </motion.a>
 
           {/* Social Links */}
@@ -32,6 +31,8 @@ export const Footer = () => {
               <motion.a
                 key={social.label}
                 href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={social.label}
                 whileHover={{ scale: 1.1, y: -3 }}
                 whileTap={{ scale: 0.95 }}

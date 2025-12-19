@@ -31,6 +31,15 @@ export const Navbar = () => {
     setIsMobileMenuOpen(false);
   };
 
+  const handleDownloadCV = () => {
+    const link = document.createElement("a");
+    link.href = "/Soumya_Mishra-Resume.pdf";
+    link.download = "Soumya_Mishra-Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -52,7 +61,7 @@ export const Navbar = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          {"<Dev />"}
+          {"<SM />"}
         </motion.a>
 
         {/* Desktop Navigation */}
@@ -75,7 +84,7 @@ export const Navbar = () => {
           <Button
             variant="neon"
             size="sm"
-            onClick={() => window.open("#", "_blank")}
+            onClick={handleDownloadCV}
             className="gap-2"
           >
             <Download className="w-4 h-4" />
@@ -120,7 +129,7 @@ export const Navbar = () => {
               <Button
                 variant="neon"
                 size="sm"
-                onClick={() => window.open("#", "_blank")}
+                onClick={handleDownloadCV}
                 className="gap-2 w-full"
               >
                 <Download className="w-4 h-4" />

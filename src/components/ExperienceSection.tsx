@@ -13,39 +13,21 @@ interface Experience {
 
 const experiences: Experience[] = [
   {
-    company: "XYZ Company",
-    role: "DevOps Engineer",
-    duration: "Jan 2023 – Present",
-    description: "Leading cloud infrastructure and CI/CD initiatives for enterprise applications.",
+    company: "Nuclei",
+    role: "Associate System Engineer (DevOps)",
+    duration: "Feb 2024 – Present",
+    description: "End-to-end ownership of cloud infrastructure and DevOps practices for enterprise-grade applications.",
     contributions: [
-      "Automated CI/CD pipelines reducing deployment time by 60%",
-      "Managed cloud infrastructure on AWS serving 1M+ users",
-      "Improved deployment reliability with zero-downtime releases",
-      "Reduced downtime through advanced monitoring and alerting",
-    ],
-  },
-  {
-    company: "ABC Tech",
-    role: "Cloud Engineer",
-    duration: "Jun 2021 – Dec 2022",
-    description: "Designed and implemented scalable cloud solutions for SaaS products.",
-    contributions: [
-      "Migrated legacy systems to containerized microservices",
-      "Implemented Infrastructure as Code using Terraform",
-      "Set up Kubernetes clusters for container orchestration",
-      "Reduced infrastructure costs by 40% through optimization",
-    ],
-  },
-  {
-    company: "StartUp Inc",
-    role: "Junior DevOps Engineer",
-    duration: "Jan 2020 – May 2021",
-    description: "Supported development teams with automation and deployment processes.",
-    contributions: [
-      "Built automated testing pipelines for multiple projects",
-      "Managed Docker containers and development environments",
-      "Created documentation for deployment procedures",
-      "Collaborated with developers to streamline workflows",
+      "Built AWS infrastructure from scratch including VPCs, EC2, EKS, RDS, S3, and IAM policies",
+      "Set up and managed Oracle Cloud Infrastructure for multi-cloud deployments",
+      "Deployed and scaled Kubernetes clusters for containerized applications",
+      "Migrated CI/CD pipelines from Jenkins to GitHub Actions, improving deployment efficiency",
+      "Implemented comprehensive monitoring and logging using Prometheus, Grafana, OpenSearch, and Fluentd",
+      "Managed database operations including backup, replication, and restoration for MySQL and PostgreSQL",
+      "Configured service mesh with Istio and Envoy for traffic management and security",
+      "Set up and maintained Nginx as reverse proxy and load balancer",
+      "Implemented network security using Suricata for intrusion detection",
+      "Took ownership beyond role expectations, proactively improving system reliability",
     ],
   },
 ];
@@ -59,34 +41,29 @@ const ExperienceCard = ({
   index: number; 
   isInView: boolean;
 }) => {
-  const isEven = index % 2 === 0;
-
   return (
     <motion.div
-      initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-      animate={isInView ? { opacity: 1, x: 0 } : {}}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
-      className="relative flex items-start gap-6 group"
+      className="relative flex items-start gap-6"
     >
-      {/* Timeline line and dot */}
+      {/* Timeline dot */}
       <div className="hidden md:flex flex-col items-center">
         <div className="w-4 h-4 rounded-full bg-primary shadow-[0_0_15px_rgba(0,255,255,0.6)] z-10" />
-        {index !== experiences.length - 1 && (
-          <div className="w-0.5 h-full bg-gradient-to-b from-primary/50 to-transparent absolute top-4" />
-        )}
       </div>
 
       {/* Card */}
       <motion.div
-        whileHover={{ scale: 1.02, y: -5 }}
-        className="flex-1 glass rounded-xl p-6 transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(0,255,255,0.15)]"
+        whileHover={{ scale: 1.01 }}
+        className="flex-1 glass rounded-xl p-6 md:p-8 transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(0,255,255,0.15)]"
       >
         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
           <div>
-            <h3 className="font-display text-xl font-bold text-primary">{experience.role}</h3>
-            <div className="flex items-center gap-2 text-foreground/80">
+            <h3 className="font-display text-xl md:text-2xl font-bold text-primary">{experience.role}</h3>
+            <div className="flex items-center gap-2 text-foreground/80 mt-1">
               <Briefcase className="w-4 h-4" />
-              <span>{experience.company}</span>
+              <span className="font-medium">{experience.company}</span>
             </div>
           </div>
           <div className="flex items-center gap-2 text-muted-foreground text-sm">
@@ -95,18 +72,18 @@ const ExperienceCard = ({
           </div>
         </div>
 
-        <p className="text-muted-foreground mb-4">{experience.description}</p>
+        <p className="text-muted-foreground mb-6">{experience.description}</p>
 
-        <ul className="space-y-2">
+        <ul className="space-y-3">
           {experience.contributions.map((contribution, i) => (
             <motion.li
               key={i}
               initial={{ opacity: 0, x: -20 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.3, delay: 0.4 + index * 0.15 + i * 0.05 }}
-              className="flex items-start gap-2 text-foreground/80 text-sm"
+              transition={{ duration: 0.3, delay: 0.4 + i * 0.05 }}
+              className="flex items-start gap-3 text-foreground/80 text-sm"
             >
-              <span className="text-primary mt-1">•</span>
+              <span className="text-primary mt-1 flex-shrink-0">▹</span>
               <span>{contribution}</span>
             </motion.li>
           ))}
@@ -144,8 +121,8 @@ export const ExperienceSection = () => {
           </p>
         </motion.div>
 
-        {/* Timeline */}
-        <div className="max-w-3xl mx-auto space-y-8">
+        {/* Experience Cards */}
+        <div className="max-w-4xl mx-auto space-y-8">
           {experiences.map((experience, index) => (
             <ExperienceCard
               key={experience.company + experience.role}
