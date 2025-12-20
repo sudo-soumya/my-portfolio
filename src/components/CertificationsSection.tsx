@@ -46,7 +46,7 @@ export const CertificationsSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-              className="glass rounded-xl p-8 flex flex-col md:flex-row items-center gap-6 transition-all duration-300 hover:border-primary/30"
+              className="glass rounded-xl p-8 flex flex-col md:flex-row items-center gap-6 card-hover"
             >
               <div className="w-32 h-32 md:w-40 md:h-40 flex-shrink-0">
                 <img
