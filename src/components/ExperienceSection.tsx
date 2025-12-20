@@ -46,11 +46,14 @@ const ExperienceCard = ({
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
-      className="relative flex items-start gap-6"
+      className="relative flex items-start gap-6 md:pl-8"
     >
-      {/* Timeline dot */}
-      <div className="hidden md:flex flex-col items-center">
-        <div className="w-4 h-4 rounded-full bg-primary shadow-[0_0_15px_rgba(0,255,255,0.6)] z-10" />
+      {/* Timeline line and dot */}
+      <div className="hidden md:block absolute left-0 top-0 bottom-0">
+        {/* Vertical line */}
+        <div className="absolute left-[7px] top-0 w-0.5 h-full bg-primary/30" />
+        {/* Timeline dot aligned with job title */}
+        <div className="absolute left-0 top-8 w-4 h-4 rounded-full bg-primary shadow-[0_0_15px_hsl(var(--primary)/0.6)] z-10" />
       </div>
 
       {/* Card */}
@@ -83,7 +86,7 @@ const ExperienceCard = ({
               transition={{ duration: 0.3, delay: 0.4 + i * 0.05 }}
               className="flex items-start gap-3 text-foreground/80 text-sm"
             >
-              <span className="text-primary mt-1 flex-shrink-0">▹</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
               <span>{contribution}</span>
             </motion.li>
           ))}
