@@ -57,7 +57,7 @@ export const HeroSection = () => {
       className="min-h-screen flex items-center justify-center pt-20 px-4"
     >
       <div className="container mx-auto">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-32 xl:gap-40">
           {/* Profile Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}

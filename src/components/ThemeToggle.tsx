@@ -19,7 +19,7 @@ export const ThemeToggle = () => {
         transition={{ duration: 0.3 }}
         className="absolute"
       >
-        <Moon className="h-5 w-5 text-primary" />
+        <Sun className="h-5 w-5 text-primary" />
       </motion.div>
       <motion.div
         initial={false}
@@ -27,7 +27,7 @@ export const ThemeToggle = () => {
         transition={{ duration: 0.3 }}
         className="absolute"
       >
-        <Sun className="h-5 w-5 text-primary" />
+        <Moon className="h-5 w-5 text-primary" />
       </motion.div>
       <span className="sr-only">Toggle theme</span>
     </Button>
