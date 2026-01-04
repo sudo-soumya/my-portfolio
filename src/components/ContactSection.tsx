@@ -1,7 +1,8 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Send, Mail, MapPin } from "lucide-react";
+import emailjs from "emailjs-com";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -70,21 +71,39 @@ export const ContactSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!validateForm()) return;
 
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
 
-    toast({
-      title: "Message sent successfully!",
-      description: "Thank you for reaching out. I'll get back to you soon.",
-    });
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for reaching out. I'll get back to you soon.",
+      });
 
-    setFormData({ name: "", email: "", subject: "", message: "" });
-    setIsSubmitting(false);
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Failed to send message",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -99,7 +118,6 @@ export const ContactSection = () => {
 
   return (
     <section id="contact" className="py-24 px-4 relative">
-      {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/3 -right-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-1/3 -left-32 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
@@ -128,14 +146,9 @@ export const ContactSection = () => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3 className="font-display text-2xl font-semibold mb-6 text-foreground">
+            <h3 className="font-display text-2xl font-semibold mb-6">
               Let's work together
             </h3>
-            <p className="text-muted-foreground mb-8 leading-relaxed">
-              I'm always excited to take on new challenges and collaborate on 
-              innovative projects. Whether you have a question or just want to 
-              say hi, my inbox is always open.
-            </p>
 
             <div className="space-y-6">
               {contactInfo.map((item, index) => (
@@ -145,16 +158,14 @@ export const ContactSection = () => {
                   initial={{ opacity: 0, x: -30 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                  className="flex items-center gap-4 p-4 glass rounded-xl card-hover group"
+                  className="flex items-center gap-4 p-4 glass rounded-xl card-hover"
                 >
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
                     <item.icon className="w-5 h-5 text-primary" />
                   </div>
                   <div>
                     <div className="text-sm text-muted-foreground">{item.label}</div>
-                    <div className="font-medium text-foreground group-hover:text-primary transition-colors">
-                      {item.value}
-                    </div>
+                    <div className="font-medium">{item.value}</div>
                   </div>
                 </motion.a>
               ))}
@@ -169,82 +180,22 @@ export const ContactSection = () => {
           >
             <form onSubmit={handleSubmit} className="glass rounded-2xl p-8 space-y-6">
               <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <Input
-                    name="name"
-                    placeholder="Your Name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className={errors.name ? "border-destructive" : ""}
-                  />
-                  {errors.name && (
-                    <p className="text-destructive text-sm mt-1">{errors.name}</p>
-                  )}
-                </div>
-                <div>
-                  <Input
-                    name="email"
-                    type="email"
-                    placeholder="Your Email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className={errors.email ? "border-destructive" : ""}
-                  />
-                  {errors.email && (
-                    <p className="text-destructive text-sm mt-1">{errors.email}</p>
-                  )}
-                </div>
+                <Input name="name" placeholder="Your Name" value={formData.name} onChange={handleChange} />
+                <Input name="email" type="email" placeholder="Your Email" value={formData.email} onChange={handleChange} />
               </div>
 
-              <div>
-                <Input
-                  name="subject"
-                  placeholder="Subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  className={errors.subject ? "border-destructive" : ""}
-                />
-                {errors.subject && (
-                  <p className="text-destructive text-sm mt-1">{errors.subject}</p>
-                )}
-              </div>
+              <Input name="subject" placeholder="Subject" value={formData.subject} onChange={handleChange} />
 
-              <div>
-                <Textarea
-                  name="message"
-                  placeholder="Your Message"
-                  rows={5}
-                  value={formData.message}
-                  onChange={handleChange}
-                  className={errors.message ? "border-destructive" : ""}
-                />
-                {errors.message && (
-                  <p className="text-destructive text-sm mt-1">{errors.message}</p>
-                )}
-              </div>
+              <Textarea
+                name="message"
+                placeholder="Your Message"
+                rows={5}
+                value={formData.message}
+                onChange={handleChange}
+              />
 
-              <Button
-                type="submit"
-                variant="neon"
-                size="lg"
-                className="w-full gap-2"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <>
-                    <motion.div
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                      className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full"
-                    />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    <Send className="w-4 h-4" />
-                    Send Message
-                  </>
-                )}
+              <Button type="submit" variant="neon" size="lg" className="w-full gap-2" disabled={isSubmitting}>
+                {isSubmitting ? "Sending..." : <><Send className="w-4 h-4" /> Send Message</>}
               </Button>
             </form>
           </motion.div>
